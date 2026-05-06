@@ -1,3 +1,5 @@
+import React, { type ReactElement } from "react";
+
 type Screen = 'home' | 'dashboard' | 'tasks' | 'calendar' | 'notes' | 'profile';
 
 interface NavbarProps {
@@ -24,7 +26,7 @@ function HomeIcon({ active }: { active: boolean }) {
   );
 }
 
-const items: { id: Screen; label: string; icon?: JSX.Element; custom?: boolean }[] = [
+const items: { id: Screen; label: string; icon?: ReactElement; custom?: boolean }[] = [
   { id: 'home', label: 'Dump', custom: true },
   {
     id: 'dashboard',
@@ -114,11 +116,9 @@ export function Navbar({ active, onNavigate }: NavbarProps) {
         >
           {item.custom
             ? <HomeIcon active={active === item.id} />
-            : (
-              <span style={active === item.id ? { filter: 'drop-shadow(0 0 6px var(--accent))' } : {}}>
+            : <span style={active === item.id ? { filter: 'drop-shadow(0 0 6px var(--accent))' } : {}}>
                 {item.icon}
               </span>
-            )
           }
           {item.label}
         </button>
