@@ -8,11 +8,12 @@ interface ToastProps {
 
 export function Toast({ message, visible, onHide }: ToastProps) {
   useEffect(() => {
-    if (visible) {
-      const t = setTimeout(onHide, 2500);
-      return () => clearTimeout(t);
-    }
-  }, [visible, onHide]);
+  if (!visible) return;
+
+  const t = setTimeout(onHide, 2500);
+
+  return () => clearTimeout(t);
+}, [visible, onHide]);
 
   return (
     <div style={{
